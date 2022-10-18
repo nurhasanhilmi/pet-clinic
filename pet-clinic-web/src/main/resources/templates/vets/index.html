@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org/">
-<head>
-  <meta charset="UTF-8">
-  <title>Vets</title>
-</head>
+
+<html xmlns:th="https://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout (~{::body},'vets')}">
+
 <body>
-<h1 th:text="'Vet List'">Title</h1>
-<table>
+
+<h2>Veterinarians</h2>
+
+<table id="vets" class="table table-striped">
   <thead>
   <tr>
     <th>ID</th>
@@ -16,11 +17,12 @@
   </thead>
   <tbody>
   <tr th:each="vet : ${vets}">
-    <td th:text="${vet.id}">ID</td>
-    <td th:text="${vet.firstName}">First Name</td>
-    <td th:text="${vet.lastName}">Last Name</td>
+    <td th:text="${vet.id}"></td>
+    <td th:text="${vet.firstName}"></td>
+    <td th:text="${vet.lastName}"></td>
   </tr>
   </tbody>
 </table>
+
 </body>
 </html>
