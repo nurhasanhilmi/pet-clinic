@@ -36,7 +36,11 @@ public class VetServiceMap extends AbstractMapService<Vet, Long> implements VetS
         if (entity == null)
             return null;
 
-        entity.getSpecialties().forEach(specialtyService::save);
+        if (entity.getSpecialties() != null)
+            entity.getSpecialties().forEach(specialty -> {
+                if (specialty.getId() == null)
+                    specialtyService.save(specialty);
+            });
 
         return super.save(entity);
     }
