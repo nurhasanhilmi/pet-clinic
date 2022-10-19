@@ -25,6 +25,12 @@ public class PetServiceMap extends AbstractMapService<Pet, Long> implements PetS
 
     @Override
     public Pet save(Pet entity) {
+        if (entity == null)
+            return null;
+
+        if (entity.getOwner() == null)
+            throw new RuntimeException("Owner cannot be null");
+
         return super.save(entity);
     }
 
