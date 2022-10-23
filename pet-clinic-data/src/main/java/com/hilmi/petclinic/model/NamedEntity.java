@@ -1,9 +1,11 @@
 package com.hilmi.petclinic.model;
 
+import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
 public class NamedEntity extends BaseEntity {
+    @Column(name = "name")
     private String name;
 
     public String getName() {
@@ -16,7 +18,7 @@ public class NamedEntity extends BaseEntity {
 
     @Override
     public String toString() {
-        return getClass().toString() + "{" +
+        return this.getClass().getSimpleName() + "{" +
                 "name='" + name + '\'' +
                 '}';
     }
