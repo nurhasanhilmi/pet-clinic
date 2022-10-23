@@ -1,10 +1,7 @@
 package com.hilmi.petclinic.bootstrap;
 
 import com.hilmi.petclinic.model.*;
-import com.hilmi.petclinic.services.OwnerService;
-import com.hilmi.petclinic.services.PetTypeService;
-import com.hilmi.petclinic.services.SpecialtyService;
-import com.hilmi.petclinic.services.VetService;
+import com.hilmi.petclinic.services.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -16,12 +13,14 @@ public class DataLoader implements CommandLineRunner {
     private final VetService vetService;
     private final PetTypeService petTypeService;
     private final SpecialtyService specialtyService;
+    private final VisitService visitService;
 
-    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService, SpecialtyService specialtyService) {
+    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService, SpecialtyService specialtyService, VisitService visitService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
         this.petTypeService = petTypeService;
         this.specialtyService = specialtyService;
+        this.visitService = visitService;
     }
 
     @Override
@@ -91,6 +90,12 @@ public class DataLoader implements CommandLineRunner {
         vet2.getSpecialties().add(surgery);
         vet2.getSpecialties().add(dentistry);
         vetService.save(vet2);
+
+        Visit visit = new Visit();
+        visit.setDescription("Visit for Fur Bug");
+        visit.setPet(hilmisCat);
+        visit.setDate(LocalDate.of(2022, 11, 1));
+        visitService.save(visit);
 
         System.out.println("Bootstrap data loaded");
     }
