@@ -38,32 +38,38 @@ public class DataLoader implements CommandLineRunner {
         cat.setName("Cat");
         petTypeService.save(cat);
 
-        Pet hilmisCat = new Pet();
-        hilmisCat.setName("Jerry");
-        hilmisCat.setPetType(cat);
-        hilmisCat.setBirthDate(LocalDate.of(2020, 5, 10));
+        Pet hilmisCat = Pet.builder()
+                .name("Jerry")
+                .petType(cat)
+                .birthDate(LocalDate.of(2020, 5, 10))
+                .build();
 
-        Owner owner1 = new Owner();
-        owner1.setFirstName("Ahmad");
-        owner1.setLastName("Hilmi");
-        owner1.setAddress("Puri Lestari");
-        owner1.setCity("Bogor Regency");
-        owner1.setTelephone("088899990000");
-        owner1.addPet(hilmisCat);
+        Owner owner1 = Owner.builder()
+                .firstName("Ahmad")
+                .lastName("Hilmi")
+                .address("Puri Lestari")
+                .city("Bogor Regency")
+                .telephone("088899990000")
+                .build()
+                .addPet(hilmisCat);
+
         ownerService.save(owner1);
 
-        Pet hasansDog = new Pet();
-        hasansDog.setName("Diamond");
-        hasansDog.setPetType(dog);
-        hasansDog.setBirthDate(LocalDate.of(2021, 9, 15));
+        Pet hasansDog = Pet.builder()
+                .name("Diamond")
+                .petType(dog)
+                .birthDate(LocalDate.of(2021, 9, 15))
+                .build();
 
-        Owner owner2 = new Owner();
-        owner2.setFirstName("Nur");
-        owner2.setLastName("Hasan");
-        owner2.setAddress("Depok Baru");
-        owner2.setCity("Depok");
-        owner2.setTelephone("081208591230");
-        owner2.addPet(hasansDog);
+        Owner owner2 = Owner.builder()
+                .firstName("Nur")
+                .lastName("Hasan")
+                .address("Depok Baru")
+                .city("Depok")
+                .telephone("081208591238")
+                .build()
+                .addPet(hasansDog);
+
         ownerService.save(owner2);
 
         Specialty radiology = new Specialty();
@@ -78,23 +84,29 @@ public class DataLoader implements CommandLineRunner {
         dentistry.setName("Dentistry");
         specialtyService.save(dentistry);
 
-        Vet vet1 = new Vet();
-        vet1.setFirstName("Lia");
-        vet1.setLastName("Amanda");
-        vet1.addSpecialty(radiology);
+        Vet vet1 = Vet.builder()
+                .firstName("John")
+                .lastName("Smith")
+                .build()
+                .addSpecialty(radiology);
+
         vetService.save(vet1);
 
-        Vet vet2 = new Vet();
-        vet2.setFirstName("Aulia");
-        vet2.setLastName("Rahmah");
-        vet2.addSpecialty(surgery);
-        vet2.addSpecialty(dentistry);
+        Vet vet2 = Vet.builder()
+                .firstName("Michael")
+                .lastName("Jackson")
+                .build()
+                .addSpecialty(surgery)
+                .addSpecialty(dentistry);
+
         vetService.save(vet2);
 
-        Visit visit = new Visit();
-        visit.setDescription("Visit for Fur Bug");
-        visit.setPet(hilmisCat);
-        visit.setDate(LocalDate.of(2022, 11, 1));
+        Visit visit = Visit.builder()
+                .description("Night Cough")
+                .pet(hilmisCat)
+                .date(LocalDate.of(2022, 11, 1))
+                .build();
+
         visitService.save(visit);
 
         System.out.println("Bootstrap data loaded");

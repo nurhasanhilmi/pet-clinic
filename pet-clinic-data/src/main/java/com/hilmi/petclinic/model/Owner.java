@@ -32,11 +32,15 @@ public class Owner extends Person {
         this.city = city;
         this.telephone = telephone;
         this.pets = pets;
+
+        if (pets == null)
+            this.pets = new HashSet<>();
     }
 
-    public void addPet(Pet pet) {
+    public Owner addPet(Pet pet) {
         pet.setOwner(this);
         this.pets.add(pet);
+        return this;
     }
 
 }

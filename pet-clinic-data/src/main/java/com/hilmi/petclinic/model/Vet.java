@@ -19,13 +19,17 @@ public class Vet extends Person {
             inverseJoinColumns = @JoinColumn(name = "specialty_id"))
     private Set<Specialty> specialties = new HashSet<>();
 
-    public void addSpecialty(Specialty specialty) {
-        this.specialties.add(specialty);
-    }
-
     @Builder
     public Vet(String firstName, String lastName, Set<Specialty> specialties) {
         super(firstName, lastName);
         this.specialties = specialties;
+
+        if (specialties == null)
+            this.specialties = new HashSet<>();
+    }
+
+    public Vet addSpecialty(Specialty specialty) {
+        this.specialties.add(specialty);
+        return this;
     }
 }
